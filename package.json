@@ -1,0 +1,13 @@
+{
+  "name": "express_api_kazi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/zobaidulkazi64/express_api_kazi.git",
+  "author": "zobaidulkazi64 <zobaidulkazi64.official@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^8.2.0",
+    "morgan": "^1.10.0"
+  }
+}

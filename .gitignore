@@ -1,0 +1,21 @@
+# Ignore build artifacts
+build/
+dist/
+*.exe
+*.dll
+
+# Ignore temporary files
+*.tmp
+.DS_Store
+
+# Ignore editor-specific files
+.vscode/
+.idea/
+
+# Ignore dependency directories
+node_modules/
+vendor/
+
+# Ignore configuration files with sensitive information (e.g., API keys)
+config.ini
+credentials.json
