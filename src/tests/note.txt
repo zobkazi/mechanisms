@@ -1,0 +1,15 @@
+// prisma-compose up
+
+// prisma-compose down
+
+
+// npx tsc --init
+
+
+// npx prisma init 
+
+// npx prisma migrate dev --name init
+
+// npx prisma migrate dev
+
+// yarn add @prisma/client

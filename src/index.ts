@@ -1,28 +1,48 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import userRoutes from './routes/';
-import authMiddleware from './middleware/authMiddleware';
+import express, { Request, Response } from 'express'
+import cors from 'cors'
+import morgan from 'morgan'
+const dotenv = require('dotenv').config()
 
-const app = express();
+import { createUser } from './controllers'
+import {getAllUsers} from './controllers'
+import {getUserById} from './controllers'
 
-app.use(express.json());
+const app = express()
 
-app.use('/api/users', userRoutes);
 
-// // Protected route example
-// app.get('/api/profile', authMiddleware, (req, res) => {
-//   // Access userId from req.userData
-//   const userId = req['userData'].userId;
-//   res.status(200).json({ message: `Profile data for user with ID: ${userId}` });
-// });
+app.use(cors())
+app.use(morgan('dev'))
+app.use(express.json())
 
-mongoose
-  .connect('mongodb://localhost:27017/your_database', {
 
-  })
-  .then(() => {
-    app.listen(3000, () => {
-      console.log('Server is running on port 3000');
-    });
-  })
-  .catch((error) => console.error(error));
+
+// routes
+app.post('/users', createUser)
+app.get('/users', getAllUsers)
+app.get('/users/:id', getUserById)
+
+
+
+app.get('/', (req, res) => {
+
+    res.send('Hello World!')
+})
+
+// 404 error
+app.use((_req: Request, res: Response) => {
+
+    res.status(404).send('Not Found')
+})
+// Error handling
+app.use((err: Error, _req: Request, res: Response) => {
+
+    res.status(500).send(err.message)
+})
+
+
+const PORT = process.env.PORT || 4000
+
+app.listen(PORT, () => {
+
+    console.log(`Server running on port ${PORT}`)
+})
