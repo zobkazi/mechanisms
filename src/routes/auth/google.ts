@@ -3,7 +3,7 @@ import { requestByGoogle, authUserData } from "@/controllers/google";
 
 const router = express.Router();
 
-router.post("/google", requestByGoogle);
+router.post("/google/callback", requestByGoogle);
 
 router.get("/google", authUserData);
 
