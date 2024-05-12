@@ -1,7 +1,7 @@
 import app from "./app";
 // import db from "./config/dbUrl";
 import "dotenv/config";
-import { registration } from "@/routes";
+import { registration, login } from "@/routes";
 import mongoose from "mongoose";
 
 app;
@@ -17,7 +17,7 @@ mongoose
   });
 
 // all the routes are defined here
-app.use("/auth", registration);
-function then(arg0: (result: any) => void) {
-  throw new Error("Function not implemented.");
-}
+
+const allRoutes = [registration, login];
+
+app.use("/auth", allRoutes);
