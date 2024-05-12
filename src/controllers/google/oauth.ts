@@ -2,8 +2,11 @@ import { Request, Response, NextFunction } from "express";
 import { OAuth2Client } from "google-auth-library";
 import fetch from "node-fetch";
 
-const CLIENT_ID = process.env.CLIENT_ID || "";
-const CLIENT_SECRET = process.env.CLIENT_SECRET || "";
+const CLIENT_ID =
+  process.env.CLIENT_ID ||
+  "926124111216-hbkufah30933oe2ua334s216j9q6rq3b.apps.googleusercontent.com";
+const CLIENT_SECRET =
+  process.env.CLIENT_SECRET || "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";
 const REDIRECT_URL = "http://localhost:3000/oauth";
 
 const getUserData = async (accessToken: string) => {
@@ -38,7 +41,7 @@ const authUserData = async (
     console.info("Tokens acquired.");
     const user = await getUserData(tokens.access_token as string);
     console.log("User Data:", user);
-    res.redirect(303, "http://localhost:5173/"); // Redirect to your desired URL after successful authentication
+    res.redirect(303, "http://localhost:3000/oauth"); // Redirect to your desired URL after successful authentication
   } catch (error) {
     console.error("Error logging in with OAuth2 user", error);
     res.status(500).send("Internal Server Error");
