@@ -3,6 +3,7 @@ import { RegistrationSchema } from "@/types/auth/UserSchemas";
 import User from "@/models/auth/User";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import RegistrationHistory from "@/models/auth/RegistrationHistory";
 
 const Registration = async (
   req: Request,
@@ -30,20 +31,32 @@ const Registration = async (
     }
 
     // hash password
+    const hashedPassword = await bcrypt.hash(parsedBody.data.password, 10);
 
     // generate token
+    const token = jwt.sign(
+      { email: parsedBody.data.email },
+      process.env.JWT_SECRET
+    );
 
-    // create loin history
+    // create Registration user history
+    await RegistrationHistory.create({
+      email: parsedBody.data.email,
+      action: "registration",
+    });
 
     // create new user
-    const user = await User.create(parsedBody.data);
+    const user = await User.create({
+      ...parsedBody.data,
+      password: hashedPassword,
+    });
 
-    // return success response
-
+    // Return success response with token
     return res.status(201).json({
       success: true,
       message: "User created successfully",
       data: user,
+      token: token,
     });
   } catch (error) {
     next(error);
