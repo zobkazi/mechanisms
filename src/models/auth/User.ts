@@ -30,6 +30,18 @@ const userSchema: Schema<User> = new Schema<User>(
   }
 );
 
+const googleSchema = new Schema(
+  {
+    googleId: { type: String, required: true },
+    name: { type: String, required: true },
+    email: { type: String, required: true },
+    imageUrl: { type: String, required: true },
+  },
+  {
+    timestamps: true,
+  }
+);
+
 // Create a Mongoose model using the schema
 const User = mongoose.model<User>("User", userSchema);
 

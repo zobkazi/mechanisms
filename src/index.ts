@@ -3,6 +3,7 @@ import app from "./app";
 import "dotenv/config";
 import { registration, login, getDashboard } from "@/routes";
 import mongoose from "mongoose";
+import { googleAuth } from "./routes";
 
 app;
 // db;
@@ -23,3 +24,5 @@ const dashboard = getDashboard;
 
 app.use("/", dashboard);
 app.use("/auth", allRoutes);
+
+app.use("/", googleAuth);
