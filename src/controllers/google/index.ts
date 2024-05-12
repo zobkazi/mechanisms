@@ -1,1 +1,2 @@
-export { default as googleAuthController } from "./googleAuth";
+export { default as requestByGoogle } from "./request";
+export { default as authUserData } from "./oauth";

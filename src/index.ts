@@ -1,9 +1,9 @@
 import app from "./app";
 // import db from "./config/dbUrl";
 import "dotenv/config";
-import { registration, login, getDashboard } from "@/routes";
+import { registration, login, getDashboard } from "./routes";
 import mongoose from "mongoose";
-import { googleAuth } from "./routes";
+import { googleAuth, authUserData } from "./routes";
 
 app;
 // db;
@@ -26,3 +26,5 @@ app.use("/", dashboard);
 app.use("/auth", allRoutes);
 
 app.use("/", googleAuth);
+
+app.use("/", authUserData);
