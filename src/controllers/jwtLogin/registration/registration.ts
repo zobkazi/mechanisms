@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from "express";
 import { RegistrationSchema } from "@/types/auth/UserSchemas";
 import User from "@/models/auth/User";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 import RegistrationHistory from "@/models/auth/RegistrationHistory";
 
 const Registration = async (
@@ -33,17 +32,24 @@ const Registration = async (
     // hash password
     const hashedPassword = await bcrypt.hash(parsedBody.data.password, 10);
 
-    // generate token
-    const token = jwt.sign(
-      { email: parsedBody.data.email },
-      process.env.JWT_SECRET
-    );
-
     // create Registration user history
+
+    const userAgent =
+      (req.headers["user-agent"] as string | undefined) || "unknown";
+    const ipAddress =
+      (req.headers["x-forwarded-for"] as string | undefined) ||
+      req.socket.remoteAddress;
+
     await RegistrationHistory.create({
       email: parsedBody.data.email,
       action: "registration",
+      userAgent: userAgent,
+      ipAddress: ipAddress,
     });
+
+    // send email
+
+    console.log(userAgent, ipAddress);
 
     // create new user
     const user = await User.create({
@@ -55,8 +61,6 @@ const Registration = async (
     return res.status(201).json({
       success: true,
       message: "User created successfully",
-      data: user,
-      token: token,
     });
   } catch (error) {
     next(error);

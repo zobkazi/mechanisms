@@ -5,7 +5,6 @@ interface User extends Document {
   name: string;
   email: string;
   password: string;
-  role: string;
 }
 
 // Define a schema for the document
@@ -24,11 +23,6 @@ const userSchema: Schema<User> = new Schema<User>(
     password: {
       type: String,
       required: true,
-    },
-    role: {
-      type: String,
-      required: true,
-      enum: ["admin", "user"],
     },
   },
   {

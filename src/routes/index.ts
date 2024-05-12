@@ -1,1 +1,1 @@
-export {default as register} from './auth/registration'
+export { default as registration } from "./auth/registration";

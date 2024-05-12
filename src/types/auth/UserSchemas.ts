@@ -4,7 +4,7 @@ export const RegistrationSchema = z.object({
   name: z.string(),
   email: z.string(),
   password: z.string(),
-  role: z.string(),
+  role: z.string().default("user"),
 });
 
 export const RegistrationHistorySchema = z.object({
