@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 
-const registering = async (req: Request, res: Response) => {
+const Registration = async (req: Request, res: Response) => {
   try {
   } catch (error) {}
 };
 
-export default registering;
+export default Registration;
