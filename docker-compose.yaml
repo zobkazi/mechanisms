@@ -23,6 +23,39 @@ services:
     depends_on:
       - mongodb
 
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog2
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    volumes:
+      - mailhog:/var/lib/mailhog
+
+  redis-stack:
+    image: redis/redis-stack:latest
+    ports:
+      - "6379:6379"
+      - "8002:8001"
+    volumes:
+      - redis-stack:/var/lib/redis-stack
+    environment:
+      - REDIS_ARGS=--save 900 1
+
+  rabbitmq:
+    image: rabbitmq:3.8-management
+    ports:
+      - "5672:5672" # RabbitMQ main port
+      - "15672:15672" # RabbitMQ management UI port
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
 volumes:
   mongodb_data:
+    driver: local
+  mailhog:
+    driver: local
+  redis-stack:
+    driver: local
+  rabbitmq_data:
     driver: local
