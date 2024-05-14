@@ -10,6 +10,7 @@
     "migrate:prod": "prisma migrate deploy"
   },
   "dependencies": {
+    "@types/redis": "^4.0.11",
     "bcryptjs": "^2.4.3",
     "connect-timeout": "^1.9.0",
     "cookie-session": "^2.1.0",
@@ -25,6 +26,7 @@
     "morgan": "^1.10.0",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
+    "redis": "^4.6.13",
     "zod": "^3.22.4"
   },
   "devDependencies": {

@@ -5,6 +5,11 @@ import { registration, login, getDashboard } from "./routes";
 import mongoose from "mongoose";
 import { googleAuth, authUserData } from "./routes";
 
+import notification from "@/routes/notification";
+import { connectRedis } from "./redisClient";
+
+import { receiveNotifications } from "./controllers/notification/Notification";
+
 app;
 // db;
 
@@ -28,3 +33,10 @@ app.use("/auth", allRoutes);
 app.use("/", googleAuth);
 
 app.use("/", authUserData);
+
+app.use("/", notification);
+
+async () => {
+  await connectRedis();
+  await receiveNotifications();
+};
