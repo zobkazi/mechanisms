@@ -3,6 +3,9 @@ import { RedisClientType } from "redis";
 const CHANNEL = "notifications";
 
 export class SenderController {
+  static getInstance() {
+    throw new Error("Method not implemented.");
+  }
   private client: RedisClientType;
 
   constructor(client: RedisClientType) {

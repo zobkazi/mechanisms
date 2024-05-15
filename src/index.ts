@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 import { googleAuth, authUserData } from "./routes";
 
 import notification from "@/routes/notification";
-import { connectRedis } from "./redisClient";
+import { SenderController } from "./controllers/notification/sending";
 
 import { receiveNotifications } from "./controllers/notification/Notification";
 
@@ -37,6 +37,6 @@ app.use("/", authUserData);
 app.use("/", notification);
 
 async () => {
-  await connectRedis();
+  await SenderController.getInstance();
   await receiveNotifications();
 };
